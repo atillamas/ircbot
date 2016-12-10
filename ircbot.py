@@ -2,6 +2,7 @@ import socket
 import os
 import sys
 import yaml
+import datetime
 
 class IRCbot:
     irc = socket.socket()
@@ -31,12 +32,15 @@ class IRCbot:
 
         return text
 
+    def run(self):
+        text = self.get_text()
+        print str(datetime.datetime.time(datetime.datetime.now())) + " " + text,
 
-irc = IRCbot()
-irc.connect()
 
+if __name__ == '__main__':
 
-while 1:
-    text = irc.get_text()
-    print text
+    irc = IRCbot()
+    irc.connect()
+    while 1:
+        irc.run()
 
