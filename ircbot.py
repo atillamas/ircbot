@@ -26,6 +26,11 @@ class IRCbot:
     def disconnect(self):
         self.irc.close()
 
+    def reconnect(self):
+        self.irc.close()
+        self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.connect()
+
     def get_text(self):
         text = self.irc.recv(2040)
 
