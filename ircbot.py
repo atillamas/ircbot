@@ -23,6 +23,9 @@ class IRCbot:
         self.irc.send("NICK " + self.botnick + "\n")
         self.irc.send("JOIN " + self.channel + "\n")
 
+    def disconnect(self):
+        self.irc.close()
+
     def get_text(self):
         text = self.irc.recv(2040)
 
