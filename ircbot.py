@@ -19,7 +19,7 @@ class IRCbot:
 
     def connect(self):
         self.irc.connect((self.server,self.port))
-        self.irc.send("USER " + self.botnick + " " + self.botnick +" " + self.botnick + " :l33tbot!\n")
+        self.irc.send("USER " + self.botnick + " " + self.botnick +" " + self.botnick + " :IRCbot!\n")
         self.irc.send("NICK " + self.botnick + "\n")
         self.irc.send("JOIN " + self.channel + "\n")
 
