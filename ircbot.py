@@ -1,11 +1,17 @@
 import socket
 import os
 import sys
+import yaml
 
 class IRCbot:
     irc = socket.socket()
     def __init__(self):
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        config = yaml.safe_load(open("./ircbot.config"))
+        self.channel  = config['channel']
+        self.server   = config['server']
+        self.port     = config['port']
+        self.botnick = config['nickname']
 
     def send(self, chan, msg):
         self.irc.send("PRIVMSG " + chan + " " + msg + "\n")
@@ -24,12 +30,6 @@ class IRCbot:
             self.irc.send('PONG ' + text.split()[1] + '\r\n')
 
         return text
-
-
-channel  = "#alksdjgalasldghaf"
-server   = "sinisalo.freenode.net"
-port     = 6667
-nickname = "test-irc-bot234"
 
 
 irc = IRCbot()
