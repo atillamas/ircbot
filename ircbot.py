@@ -47,6 +47,15 @@ class IRCbot:
 
         return text
 
+    def check_url(self, string):
+	''' Function that checks if given string contains one or more urls, returns a list with found urls '''
+	urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', string)
+	if urls:
+	    print "Found url: ", urls
+	    return urls
+	else:
+	    return False
+
     def run(self):
         ''' Main function running logic'''
         text = self.get_text()
