@@ -10,11 +10,22 @@ class IRCbot:
     def __init__(self):
         ''' Initialize instance'''
         self.irc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        config = yaml.safe_load(open("./ircbot.config"))
-        self.channel  = config['channel']
-        self.server   = config['server']
-        self.port     = config['port']
+        config = self.load_config("./ircbot.config")
+        self.channel = config['channel']
+        self.server = config['server']
+        self.port = config['port']
         self.botnick = config['nickname']
+
+    def load_config(self, filename):
+        ''' Loads config file if it exist, else exit with error message '''
+        if os.path.isfile(filename):
+            try:
+                config = yaml.safe_load(open("./ircbot.config"))
+            except:
+                print "Error loading config file"
+                sys.exit(1)
+        return config
+
 
     def send(self, chan, msg):
         ''' Function to send message to irc channel '''
